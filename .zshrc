@@ -32,10 +32,13 @@ fi
 
 
 # Custom ZSH
-#alias vi=nvim
+alias vi=nvim
 alias vim=nvim
-#alias ovim=vim
+alias oldvim=/usr/local/bin/vim
 alias kat="pygmentize -O encoding=UTF-8 -g"
+alias kafon="/usr/local/Cellar/kafka/0.11.0.0/bin/kafka-server-start /usr/local/etc/kafka/server.properties >> /dev/null &"
+alias kafoff="/usr/local/Cellar/kafka/0.11.0.0/bin/kafka-server-stop"
+alias wo="workon"
 # Copy my public key to the pasteboard
 alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
 # Empty the Trash on all mounted volumes and the main HDD
@@ -64,12 +67,11 @@ alias tnew='tmux new-session -s'
 alias tls='tmux list-sessions'
 alias tkill='tmux kill-session -t'
 
-#export WORKON_HOME=~/Virtualenvs
-#export PIP_REQUIRE_VIRTUALENV=true
-gpip(){
+export PIP_REQUIRE_VIRTUALENV=true
+pip2(){
    PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
-gpip3(){
+pip3(){
     PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
 }
 #source /usr/local/bin/virtualenvwrapper.sh
@@ -82,3 +84,17 @@ export GOPATH=$HOME/Golang
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+
+export MYGO=$HOME/Golang/src/github.com/tanlinhnd
+export PATH=$PATH:$HOME/.composer/vendor/bin
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/Devel
+source /usr/local/bin/virtualenvwrapper.sh
+
+# Apache spark
+export SPARK_HOME=/usr/local/Cellar/apache-spark/2.2.0/libexec
+
+# Yarn
+export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
+export PYTHONDONTWRITEBYTECODE
