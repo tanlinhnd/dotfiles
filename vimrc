@@ -9,7 +9,7 @@ set noundofile
 " Autoload vimrc after edit
 " autocmd! bufwritepost .vimrc source %
 
-set history=50
+set history=100
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
 set incsearch     " do incremental searching
@@ -25,7 +25,7 @@ set autoread
 set autowrite
 
 " Set cursorline
-set cursorline
+" set cursorline
 
 " It is convenient to temporarily fold away (hide) parts of your file, leaving only an outline of the major parts visible.
 set fdm=indent
@@ -56,7 +56,7 @@ set guifont=Fira\ Code:h12
 
 " Numbers
 set number
-set numberwidth=5
+set numberwidth=3
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow

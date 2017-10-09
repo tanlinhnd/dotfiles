@@ -67,7 +67,7 @@ alias tnew='tmux new-session -s'
 alias tls='tmux list-sessions'
 alias tkill='tmux kill-session -t'
 
-export PIP_REQUIRE_VIRTUALENV=true
+# export PIP_REQUIRE_VIRTUALENV=true
 pip2(){
    PIP_REQUIRE_VIRTUALENV="" pip "$@"
 }
@@ -97,4 +97,4 @@ export SPARK_HOME=/usr/local/Cellar/apache-spark/2.2.0/libexec
 
 # Yarn
 export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
-export PYTHONDONTWRITEBYTECODE
+export PYTHONDONTWRITEBYTECODE=1
