@@ -65,6 +65,9 @@ set splitright
 " Always use vertical diffs
 set diffopt+=vertical
 
+" Disable preview deoplete
+set completeopt-=preview
+
 " Copy to clipboard
 set clipboard=unnamed
 
@@ -86,8 +89,8 @@ if filereadable(expand("~/.vimrc.bundles"))
     source ~/.vimrc.bundles
 endif
 
-colorscheme neodark
-let g:neodark#solid_vertsplit = 1 " default: 0
+"colorscheme neodark
+"let g:neodark#solid_vertsplit = 1 " default: 0
 
 " When the type of shell script is /bin/sh, assume a POSIX-compatible
 " shell for syntax highlighting purposes.
@@ -226,17 +229,17 @@ let g:tagbar_type_go = {
             \ }
 
 " Skip the check of neovim module
-let g:python3_host_skip_check = 1
+" let g:python3_host_skip_check = 1
 
-let g:python_host_prog = '/usr/local/bin/python'
-let g:python3_host_prog = '/usr/local/bin/python3'
+" let g:python_host_prog = '/usr/local/bin/python'
+" let g:python3_host_prog = '/usr/local/bin/python3'
 
 " Run deoplete.nvim automatically
 let g:deoplete#enable_at_startup = 1
 
 " neosnippet
-let g:neosnippet#enable_completed_snippet = 1
-let g:autocomplete_flow#insert_paren_after_function = 0
+" let g:neosnippet#enable_completed_snippet = 1
+" let g:autocomplete_flow#insert_paren_after_function = 0
 
 " deoplete-go settings
 let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
@@ -249,13 +252,11 @@ let g:gitgutter_sign_modified = '*'
 let g:gitgutter_sign_removed = '-'
 let g:gitgutter_max_signs=500
 
-let NERDTreeShowHidden=1
+"let NERDTreeShowHidden=1
 
 " ale vim
-let g:ale_linters = {
-            \   'javascript': ['eslint'],
-            \   'python' : ['flake8'],
-            \}
+" let g:ale_linters = {
+            " \   'javascript': ['eslint'],
+            " \   'python' : ['flake8'],
+            " \}
 
-" set vue filetype
-autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css

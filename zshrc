@@ -5,12 +5,14 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+#ZSH_THEME="robbyrussell"
+ZSH_THEME="tanlinh"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+#plugins=(git)
+plugins=(git colored-man colorize github jira vagrant virtualenv pip python brew osx zsh-syntax-highlighting)
 
 # User configuration
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -28,7 +30,7 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+#[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 
 # Custom ZSH
@@ -53,6 +55,7 @@ alias hidedeskicons="defaults write com.apple.finder CreateDesktop -bool false &
 alias pyserver="python -m SimpleTornadoServer"
 alias ftpon="sudo -s launchctl load -w /System/Library/LaunchDaemons/ftp.plist"
 alias ftpoff="sudo -s launchctl unload -w /System/Library/LaunchDaemons/ftp.plist"
+alias ss="source $ZSH/oh-my-zsh.sh"
 
 # convenience aliases for editing configs
 alias ev='vim ~/.vimrc'

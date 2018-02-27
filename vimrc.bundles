@@ -12,16 +12,16 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
+" Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'airblade/vim-gitgutter'
-Plug 'elzr/vim-json'
+" Plug 'elzr/vim-json'
 Plug 'w0rp/ale'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'sbdchd/neoformat'
+" Plug 'Shougo/neosnippet'
+" Plug 'Shougo/neosnippet-snippets'
+" Plug 'sbdchd/neoformat'
 " for React
-Plug 'mxw/vim-jsx'
-Plug 'KeitaNakamura/neodark.vim'
+"Plug 'mxw/vim-jsx'
+"Plug 'KeitaNakamura/neodark.vim'
 call plug#end()
