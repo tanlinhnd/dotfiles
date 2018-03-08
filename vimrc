@@ -176,6 +176,7 @@ let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_play_open_browser = 0
 let g:go_disable_autoinstall = 0
+let g:go_fmt_command = "goimports"
 
 autocmd FileType go nmap <leader>b  <Plug>(go-build)
 let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
