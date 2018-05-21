@@ -25,10 +25,10 @@ if [ -f ~/.vimrc.bundles ]; then
 fi
 
 # TODO: Install spacemacs first
-if [ -f ~/.spacemacs ]; then
-    mv ~/.spacemacs ~/.spacemacs.$CURRENT_DATE
-    echo "- Backup file .spacemacs to .spacemacs$CURRENT_DATE"
-fi
+#if [ -f ~/.spacemacs ]; then
+#    mv ~/.spacemacs ~/.spacemacs.$CURRENT_DATE
+#    echo "- Backup file .spacemacs to .spacemacs$CURRENT_DATE"
+#fi
 
 echo "> Use symlink to install dotfiles..."
 ln -s $(pwd)/vimrc ~/.vimrc
@@ -37,7 +37,7 @@ ln -s $(pwd)/tmux.conf ~/.tmux.conf
 ln -s $(pwd)/zshrc ~/.zshrc
 cp -r ./nvim ~/.config/
 ln -s $(pwd)/vimrc ~/.config/nvim/init.vim
-ln -s $(pwd)/spacemacs ~/.spacemacs 
+#ln -s $(pwd)/spacemacs ~/.spacemacs 
 
 echo "> Done. Have fun!"
 echo "P/s: Open file ~/.vimrc.bundles then run :PlugInstall after this. TY!"
