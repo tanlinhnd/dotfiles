@@ -6,7 +6,7 @@ export ZSH=~/.oh-my-zsh
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="tanlinh"
+ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -70,34 +70,22 @@ alias tnew='tmux new-session -s'
 alias tls='tmux list-sessions'
 alias tkill='tmux kill-session -t'
 
-# export PIP_REQUIRE_VIRTUALENV=true
-pip2(){
-   PIP_REQUIRE_VIRTUALENV="" pip "$@"
-}
-pip3(){
-    PIP_REQUIRE_VIRTUALENV="" pip3 "$@"
-}
-#source /usr/local/bin/virtualenvwrapper.sh
-
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 # Golang
-export GOPATH=$HOME/Golang
+export GOPATH=$HOME/go
 export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
-export MYGO=$HOME/Golang/src/github.com/tanlinhnd
-export PATH=$PATH:$HOME/.composer/vendor/bin
+# pyenv
+export PATH="/Users/tanlinh/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-export WORKON_HOME=$HOME/.virtualenvs
-export PROJECT_HOME=$HOME/Devel
-source /usr/local/bin/virtualenvwrapper.sh
+export ETCDCTL_API=3
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# Apache spark
-export SPARK_HOME=/usr/local/Cellar/apache-spark/2.2.0/libexec
-
-# Yarn
-export PATH="$PATH:$HOME/.config/yarn/global/node_modules/.bin"
-export PYTHONDONTWRITEBYTECODE=1
+# added by travis gem
+[ -f /Users/tanlinh/.travis/travis.sh ] && source /Users/tanlinh/.travis/travis.sh
