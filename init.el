@@ -1,7 +1,15 @@
 ;; Package configs
+
 (require 'package)
-(setq package-enable-at-startup nil)
-(setq package-archives '(("melpa" . "https://melpa.org/packages/")))
+(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
+                    (not (gnutls-available-p))))
+       (proto (if no-ssl "http" "https")))
+  ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
+  ; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")) t)
+  (add-to-list 'package-archives (cons "org" (concat proto "://orgmode.org/elpa/")) t)
+)
 (package-initialize)
 
 ;; Bootstrap `use-package`
@@ -110,7 +118,10 @@
 
 ;; Highlight current line
 (global-hl-line-mode 1)
-(set-face-background 'hl-line "#3e4446")
+; (set-face-background 'hl-line "#3e4446")
+
+;; auto pair
+(electric-pair-mode 1)
 
 ;; Custom keybinding
 (use-package general
@@ -119,9 +130,9 @@
   :states '(normal visual insert emacs)
   :prefix "SPC"
   :non-normal-prefix "M-SPC"
-  "/"   '(counsel-projectile-ag :which-key "search project with ag")
+  "/"   '(counsel-git-grep :which-key "search project with ag")
   "SPC" '(execute-extended-command :which-key "execute command")'
-  "TAB" '(switch-to-prev-buffer :which-key "previous buffer")
+  "TAB" '(switch-to-previous-buffer :which-key "previous buffer")
   ;; file
   "f"   '(:which-key "files")
   "ff"	'(counsel-find-file :which-key "find files")
@@ -136,11 +147,14 @@
   "ps" '(counsel-projectile-ag	:which-key "search project with ag")
   ;; swiper
   "s"   '(:which-key "swiper")
-  "ss" '(swiper :which-key "search symbol in file")
+  "ss"  '(swiper :which-key "search symbol in file")
+  "sj"  '(counsel-imenu :which-key "list functions")
   ;; Buffers
   "b"   '(:which-key "buffers")
   "bb"  '(switch-to-buffer :which-key "buffers list")
   "bd"  '(kill-this-buffer :which-key "kill buffer")
+  ;; Comment a block
+  ";"   '(comment-dwim :which-key "comment a block")
   ;; Window
   "w"   '(:which-key "window")
   "wl"  '(windmove-right :which-key "move right")
@@ -164,6 +178,22 @@
 (defun switch-to-previous-buffer ()
 (interactive)
 (switch-to-buffer (other-buffer (current-buffer) 1)))
+
+(defun shell-same-window-advice (orig-fn &optional buffer)
+  "Advice to make `shell' reuse the current window.
+
+Intended as :around advice."
+  (let* ((buffer-regexp
+          (regexp-quote
+           (cond ((bufferp buffer)  (buffer-name buffer))
+                 ((stringp buffer)  buffer)
+                 (:else             "*shell*"))))
+         (display-buffer-alist
+          (cons `(,buffer-regexp display-buffer-same-window)
+                display-buffer-alist)))
+    (funcall orig-fn buffer)))
+
+(advice-add 'shell :around #'shell-same-window-advice)
 
 ;; Ivy
 (use-package ivy
@@ -222,6 +252,14 @@
 ;;;;;;;;;;;;;;;;;;;;;;;
 ;; Language Supports ;;
 ;;;;;;;;;;;;;;;;;;;;;;;
+(use-package markdown-mode
+  :ensure t
+  :commands (markdown-mode gfm-mode)
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-command "multimarkdown"))
+  
 (use-package go-mode
   :ensure t)
 
@@ -274,7 +312,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (go-guru flycheck-gometalinter company company-go go-mode ivy which-key use-package spaceline neotree general evil-escape doom-themes))))
+    (dockerfile-mode markdown-mode go-guru flycheck-gometalinter company company-go go-mode ivy which-key use-package spaceline neotree general evil-escape doom-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
