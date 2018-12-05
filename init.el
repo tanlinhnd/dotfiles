@@ -61,7 +61,7 @@
 (tooltip-mode    -1)
 (menu-bar-mode   -1)
 (global-linum-mode 1)
-(add-to-list 'default-frame-alist '(font . "Fira Code-13"))
+(add-to-list 'default-frame-alist '(font . "Fira Code-14"))
 (add-to-list 'default-frame-alist '(height . 48))
 (add-to-list 'default-frame-alist '(width . 160))
 
@@ -93,6 +93,7 @@
   :ensure t
   :init
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+(setq neo-autorefresh t)
 
 (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-quick-look)
 (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
@@ -260,6 +261,15 @@ Intended as :around advice."
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
   
+;; yaml
+(use-package yaml-mode
+  :ensure t)
+
+(add-hook 'yaml-mode-hook
+  '(lambda ()
+    (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+;; go mode
 (use-package go-mode
   :ensure t)
 
@@ -273,6 +283,23 @@ Intended as :around advice."
 ;; go-guru for go mode
 (use-package go-guru
   :demand t)
+
+;; overloading func go import
+(defun go-packages-find ()
+  (sort
+   (delete-dups
+    (cl-mapcan (lambda (topdir)
+                 (let ((pkgdir (concat topdir "/pkg")))
+                   (mapcar (lambda (file)
+                             (let ((sub (substring file 0 -2)))
+                               (mapconcat #'identity (cdr (split-string sub "/")) "/")))
+                           (split-string (shell-command-to-string
+                                          (format "find \"%s\" -not -path \"%s/tool*\" -not -path \"%s/obj/*\" -name \"*.a\"  -printf \"%%P\\n\""
+                                                  pkgdir pkgdir pkgdir))))))
+               (go-root-and-paths)))
+   #'string<))
+
+(setq go-packages-function 'go-packages-find)
 
 (go-guru-hl-identifier-mode)
 
@@ -300,7 +327,7 @@ Intended as :around advice."
   (setq flycheck-gometalinter-disable-all t)
   (setq flycheck-gometalinter-enable-linters '("golint"))
   ;; Set different deadline (default: 5s)
-  (setq flycheck-gometalinter-deadline "10s")
+  ; (setq flycheck-gometalinter-deadline "10s")
   :config
   (progn
     (flycheck-gometalinter-setup)))
@@ -312,7 +339,7 @@ Intended as :around advice."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (dockerfile-mode markdown-mode go-guru flycheck-gometalinter company company-go go-mode ivy which-key use-package spaceline neotree general evil-escape doom-themes))))
+    (magit dockerfile-mode markdown-mode go-guru flycheck-gometalinter company company-go go-mode ivy which-key use-package spaceline neotree general evil-escape doom-themes))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
