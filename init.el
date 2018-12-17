@@ -6,7 +6,7 @@
        (proto (if no-ssl "http" "https")))
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
   ; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
-  (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
+  (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
   (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")) t)
   (add-to-list 'package-archives (cons "org" (concat proto "://orgmode.org/elpa/")) t)
 )
@@ -45,7 +45,7 @@
 
 ;; Splash Screen
 (setq inhibit-startup-screen t)
-(setq initial-scratch-message ";; Happy Hacking")
+(setq initial-scratch-message ";; Linh Nguyen @ github.com/tanlinhnd")
 
 ;; Show matching parens
 (setq show-paren-delay 0)
