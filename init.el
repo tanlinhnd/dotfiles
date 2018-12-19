@@ -1,12 +1,12 @@
-;; Package configs
+; Package configs
 
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
   ;; Comment/uncomment these two lines to enable/disable MELPA and MELPA Stable as desired
-  ; (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
   (add-to-list 'package-archives (cons "melpa" (concat proto "://melpa.org/packages/")) t)
+  ; (add-to-list 'package-archives (cons "melpa-stable" (concat proto "://stable.melpa.org/packages/")) t)
   (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")) t)
   (add-to-list 'package-archives (cons "org" (concat proto "://orgmode.org/elpa/")) t)
 )
@@ -146,6 +146,7 @@
   "pp"  '(counsel-projectile-switch-project :which-key "switch project")
   "pb"  '(counsel-projectile-switch-to-buffer	 :which-key "switch buffer")
   "ps" '(counsel-projectile-ag	:which-key "search project with ag")
+  "pc" '(projectile-kill-buffers  :which-key "kill all buffers")
   ;; swiper
   "s"   '(:which-key "swiper")
   "ss"  '(swiper :which-key "search symbol in file")
@@ -182,7 +183,6 @@
 
 (defun shell-same-window-advice (orig-fn &optional buffer)
   "Advice to make `shell' reuse the current window.
-
 Intended as :around advice."
   (let* ((buffer-regexp
           (regexp-quote
@@ -228,16 +228,18 @@ Intended as :around advice."
 (use-package company
   :ensure t
   :config
-  (global-company-mode 1))
+  (global-company-mode 1)
+  :init
+  (setq company-minimum-prefix-length 3)
+  (setq company-auto-complete nil)
+  (setq company-idle-delay 0)
+  (setq company-require-match 'never)
+  )
 
-(add-hook 'go-mode-hook
-      (lambda ()
-        (set (make-local-variable 'company-backends) '(company-go))
-        (company-mode)))
-
-(with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-j") #'company-select-next)
-  (define-key company-active-map (kbd "C-k") #'company-select-previous))
+;; Company mode for golang
+(use-package company-go
+  :ensure t
+  )
 
 ;; Powerline
 (use-package spaceline
@@ -260,6 +262,10 @@ Intended as :around advice."
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
   :init (setq markdown-command "multimarkdown"))
+
+;; dockermode
+(use-package dockerfile-mode
+  :ensure t)
   
 ;; yaml
 (use-package yaml-mode
@@ -273,6 +279,20 @@ Intended as :around advice."
 (use-package go-mode
   :ensure t)
 
+(setq company-tooltip-limit 20)                      ; bigger popup window
+(setq company-idle-delay .3)                         ; decrease delay before autocompletion popup shows
+(setq company-echo-delay 0)                          ; remove annoying blinking
+(setq company-begin-commands '(self-insert-command)) ; start autocompletion only after typing
+
+(add-hook 'go-mode-hook
+      (lambda ()
+        (set (make-local-variable 'company-backends) '(company-go))
+        (company-mode)))
+
+(with-eval-after-load 'company
+  (define-key company-active-map (kbd "C-j") #'company-select-next)
+  (define-key company-active-map (kbd "C-k") #'company-select-previous))
+
 (use-package flymake-go
   :ensure t)
 
@@ -282,6 +302,7 @@ Intended as :around advice."
 
 ;; go-guru for go mode
 (use-package go-guru
+  :ensure t
   :demand t)
 
 ;; overloading func go import
