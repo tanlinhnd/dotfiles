@@ -1,4 +1,10 @@
 call plug#begin('~/.config/nvim/plugged')
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'jiangmiao/auto-pairs'
@@ -7,18 +13,15 @@ Plug 'ervandew/supertab'
 Plug 'scrooloose/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'fatih/vim-go'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'mhinz/vim-startify'
 Plug 'Yggdroot/indentLine'
 Plug 'majutsushi/tagbar'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'airblade/vim-gitgutter'
-Plug 'w0rp/ale'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'ryanoasis/vim-devicons'
-" Plug 'tpope/vim-obsession'
 Plug 'joshdick/onedark.vim'
+" Plug 'pearofducks/ansible-vim', { 'do': 'cd ./UltiSnips; ./generate.py' }
+Plug 'editorconfig/editorconfig-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()

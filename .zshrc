@@ -5,17 +5,20 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="risto"
 #ZSH_THEME="robbyrussell"
+ZSH_THEME="risto"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="agnoster"
+#ZSH_THEME="philthy"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 #plugins=(git)
-plugins=(git colored-man-pages colorize github jira vagrant virtualenv pip python zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git colorize github virtualenv pip python zsh-syntax-highlighting)
 
 # User configuration
-export PATH=$HOME/bin:$PATH
+export PATH="$HOME/bin":$PATH
 
 source $ZSH/oh-my-zsh.sh
 
@@ -23,7 +26,7 @@ source $ZSH/oh-my-zsh.sh
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR="vim"
 else
-  export EDITOR="nvim"
+  export EDITOR="vim"
 fi
 
 # Example aliases
@@ -34,11 +37,14 @@ fi
 
 
 # Custom ZSH
-alias vi=vim
+alias tf=terraform
+alias tfi=terraforming
+alias tfp="terraform plan"
+alias tfa="terraform apply"
+alias vi=/usr/bin/vim
 alias vim=nvim
-# Copy my public key to the pasteboard
-alias pubkey="cat ~/.ssh/id_rsa.pub | xclip -selection c | printf '=> Public key copied to pasteboard.\n'"
-alias pyserver="python -m SimpleTornadoServer"
+#alias oldvim=/usr/bin/vim
+alias pubkey="cat ~/.ssh/id_rsa.pub | pbcopy | printf '=> Public key copied to pasteboard.\n'"
 alias ss="source $HOME/.zshrc"
 
 # convenience aliases for editing configs
@@ -46,9 +52,6 @@ alias ev='vim ~/.config/nvim/init.vim'
 alias evb='vim ~/.config/nvim/vim.bundles'
 alias et='vim ~/.tmux.conf'
 alias ez='vim ~/.zshrc'
-alias ei='vim ~/.i3/config'
-alias eib='vim ~/.config/i3blocks/config'
-alias es='vim ~/.ssh/config'
 
 # alias for tmux
 alias ta='tmux attach -t'
@@ -56,27 +59,18 @@ alias tnew='tmux new-session -s'
 alias tls='tmux list-sessions'
 alias tkill='tmux kill-session -t'
 
-alias dell='xrandr --output HDMI1 --auto --right-of eDP1 --mode 2560x1440 && nitrogen --restore'
-alias hp='xrandr --output HDMI1 --auto --right-of eDP1 --mode 1920x1080 && nitrogen --restore'
-alias office_dup='xrandr --output HDMI1 --auto --same-as eDP1 --mode 1920x1080 && nitrogen --restore'
-alias office_right='xrandr --output HDMI1 --auto --right-of eDP1 --mode 1920x1080 && nitrogen --restore'
-
-# alias for terraform
-alias tf="terraform"
-alias tfi="terraform init"
-alias tfp="terraform plan"
-alias tfa="terraform apply"
-
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-
 # Golang
 export GOPATH=$HOME/go
+export GOROOT=/usr/local/go
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:$HOME/bin
 
-# Yarn
-export PATH="$PATH:`yarn global bin`"
+# Vietnamese
+export GTK_IM_MODULE=ibus
+export QT4_IM_MODULE=xim
+export QT_IM_MODULE=xim
+export XMODIFIERS=@im=ibus
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -93,14 +87,3 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
-export GTK_IM_MODULE=ibus
-export XMODIFIERS=@im=ibus
-export QT_IM_MODULE=ibus
-
-# disable beep
-xset -b
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/vault vault
-export VAULT_ADDR='http://127.0.0.1:8200'
-export VAULT_DEV_ROOT_TOKEN_ID='s.x8DKbFoPVEMVcOXZU6FAYHLC'
