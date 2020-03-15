@@ -11,8 +11,7 @@ ZSH_THEME="risto"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-#plugins=(git)
-plugins=(git colored-man-pages colorize github jira vagrant virtualenv pip python zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(git colored-man-pages colorize github jira vagrant virtualenv pip python)
 
 # User configuration
 export PATH=$HOME/bin:$PATH
@@ -57,6 +56,7 @@ alias tls='tmux list-sessions'
 alias tkill='tmux kill-session -t'
 
 alias dell='xrandr --output HDMI1 --auto --right-of eDP1 --mode 2560x1440 && nitrogen --restore'
+alias dell_dup='xrandr --output HDMI1 --auto --same-as eDP1 --mode 1920x1080 && nitrogen --restore'
 alias hp='xrandr --output HDMI1 --auto --right-of eDP1 --mode 1920x1080 && nitrogen --restore'
 alias office_dup='xrandr --output HDMI1 --auto --same-as eDP1 --mode 1920x1080 && nitrogen --restore'
 alias office_right='xrandr --output HDMI1 --auto --right-of eDP1 --mode 1920x1080 && nitrogen --restore'
@@ -76,22 +76,7 @@ export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
 # Yarn
-export PATH="$PATH:`yarn global bin`"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/linhnguyen/anaconda2/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/linhnguyen/anaconda2/etc/profile.d/conda.sh" ]; then
-        . "/home/linhnguyen/anaconda2/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/linhnguyen/anaconda2/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+#export PATH="$PATH:`yarn global bin`"
 
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
@@ -99,8 +84,3 @@ export QT_IM_MODULE=ibus
 
 # disable beep
 xset -b
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/bin/vault vault
-export VAULT_ADDR='http://127.0.0.1:8200'
-export VAULT_DEV_ROOT_TOKEN_ID='s.x8DKbFoPVEMVcOXZU6FAYHLC'
