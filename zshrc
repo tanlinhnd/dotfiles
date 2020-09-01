@@ -5,8 +5,8 @@ export ZSH=~/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="risto"
-#ZSH_THEME="robbyrussell"
+#ZSH_THEME="risto"
+ZSH_THEME="pi"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
@@ -78,9 +78,29 @@ export PATH=$PATH:$GOROOT/bin
 # Yarn
 #export PATH="$PATH:`yarn global bin`"
 
+# Anaconda2
+export ANACONDA_HOME=$HOME/anaconda2
+export PATH=$ANACONDA_HOME/bin:$PATH
+
 export GTK_IM_MODULE=ibus
 export XMODIFIERS=@im=ibus
 export QT_IM_MODULE=ibus
 
 # disable beep
 xset -b
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/linhnguyen/anaconda2/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/linhnguyen/anaconda2/etc/profile.d/conda.sh" ]; then
+        . "/home/linhnguyen/anaconda2/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/linhnguyen/anaconda2/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
